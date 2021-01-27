@@ -1,0 +1,42 @@
+﻿<transition name="fade">
+    <div v-if="manageEvents.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div style="margin-bottom:16px;">
+                <a href="/#blade/manage/event" class="btn btn-pri">添加日程</a>
+            </div>
+            <div class="list-item-row header">
+                <div class="list-item" style="width:200px">日程名称</div>
+                <div class="list-item a"></div>
+                <div class="list-item" style="width:200px">创建时间</div>
+                <div class="list-item" style="width:200px">开始时间</div>
+                <div class="list-item" style="width:200px">结束时间</div>
+            </div>
+            <div class="list-item-row" v-for="a in manageEvents.events" style="align-items:flex-start;padding:8px;">
+                <div class="list-item" style="width:200px">
+                    <a v-bind:href="'/#blade/manage/event?id='+a.Id"><img style="width:100%;" v-bind:src="a.Match.FullImage" /></a>
+                </div>
+                <div class="list-item a" style="padding:0 16px;">
+                    <div>
+                        <a v-bind:href="'/#blade/manage/event?id='+a.Id"><span style="color:#670404;font-size:1.2rem;">{{a.Name}}</span></a>
+                    </div>
+                    <div style="margin-top:8px;">
+                        <span style="color:#3e3e3e;font-size:0.8rem;">
+                            {{a.Match.Name}}
+                        </span>
+                    </div>
+                </div>
+                <div class="list-item" style="width:200px">
+                    <span style="color:#3e3e3e;font-size:1.2rem;">{{a.CreateTime}}</span>
+                </div>
+                <div class="list-item" style="width:200px">
+                    <span style="color:#3e3e3e;font-size:1.2rem;">{{a.StartTime}}</span>
+                </div>
+                <div class="list-item" style="width:200px">
+                    <span style="color:#3e3e3e;font-size:1.2rem;">{{a.EndTime}}</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</transition>

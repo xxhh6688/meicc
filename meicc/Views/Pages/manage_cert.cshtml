@@ -1,0 +1,29 @@
+﻿<transition name="fade">
+    <div v-if="manageCert.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div style="margin-bottom:40px;font-size:2rem;">
+                <span v-if="!manageCert.cert.Id">新建证书</span>
+                <span v-if="manageCert.cert.Id">修改证书</span>
+            </div>
+            <div class="input-box">
+                <div class="input-box-label"><span>证书名称</span></div>
+                <input type="text" v-model="manageCert.cert.Name" />
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label"><span>证书编号</span><a href="javascript:void(0)" style="color:#0094ff" v-on:click="manageCert.newCertId()"><span style="margin-left:20px;margin-right:4px;" class="fas fa-undo-alt"></span><span>生成编号</span></a></div>
+                <input type="text" v-model="manageCert.cert.CertId" />
+                
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label"><span>证书内容</span></div>
+                <textarea id="cert-content">{{manageCert.cert.Content}}</textarea>
+            </div>
+            <div style="margin-top:20px;">
+                <a href="javascript:void(0)" v-if="manageCert.cert.Id" class="btn btn-pri" v-on:click="manageCert.updateCert()">更新</a>
+                <a href="javascript:void(0)" v-if="manageCert.cert.Id" class="btn btn-pri" v-on:click="manageCert.deleteCert()">删除</a>
+                <a href="javascript:void(0)" v-if="!manageCert.cert.Id" class="btn btn-pri" v-on:click="manageCert.addCert()">确定</a>
+            </div>
+        </div>
+    </div>
+</transition>

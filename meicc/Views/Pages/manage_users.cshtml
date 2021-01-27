@@ -1,0 +1,31 @@
+﻿<transition name="fade">
+    <div v-if="manageUsers.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div style="margin-bottom:16px;display:flex;align-items:center;">
+                <div class="search-bar" style="width:300px;border:thin solid #cccccc;">
+                    <input type="text" placeholder="搜索用户" v-model="manageUsers.searchText" v-on:keyup.enter="manageUsers.searchUser()" />
+                    <div class="search-btn">
+                        <i class="fas fa-search" v-on:click="manageUsers.searchUser()"></i>
+                    </div>
+                </div>
+                <a href="/#blade/manage/user" class="btn btn-pri">添加用户</a>
+                <span style="margin-left:20px;">共{{manageUsers.users.length}}个用户</span>
+            </div>
+            <div class="list-item-row header">
+                <div class="list-item a">用户姓名</div>
+                <div class="list-item" style="width:200px">手机号</div>
+                <div class="list-item" style="width:200px">用户类型</div>
+                <div class="list-item" style="width:80px">操作</div>
+            </div>
+            <div class="list-item-row color-row" v-for="a in manageUsers.users">
+                <div class="list-item a"><a v-bind:href="'/#blade/manage/user?id='+a.Id"><span style="color:#670404;font-size:1.2rem;">{{a.Name}}</span></a></div>
+                <div class="list-item" style="width:200px">{{a.Cellphone}}</div>
+                <div class="list-item" style="width:200px"><span>{{a.TypeText}}</span></div>
+                <div class="list-item" style="width:80px">
+                    <div><a v-bind:href="'/#blade/manage/user?id='+a.Id">编辑</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>

@@ -1,0 +1,26 @@
+﻿<transition name="fade">
+    <div v-if="article.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div class="site-nav" v-if="!article.article.m">
+                <a href="/">首页</a> <span style="margin:0 16px;">></span> <a href="/#blade/articles">新闻</a> <span style="margin:0 16px;">></span> 新闻内容
+            </div>
+            <div style="margin-bottom:20px;height:40px;justify-content:center;width:100px;background-color:#808080;color:#ffffff;padding:16px;display:flex;align-items:center;">
+                <span>文章</span>
+            </div>
+            <div style="display:flex;margin-bottom:30px;">
+                <div style="font-size:2rem;flex:1 1 auto;padding-right:16px;">
+                    <span>{{article.article.Title}}</span>
+                </div>
+                <div style="flex:0 0 auto;width:200px;">
+                    <div style="margin-bottom:16px;">
+                        <span style="font-size:1.2rem;">{{article.article.CreateTime}}</span>
+                    </div>
+                    <div>
+                        <span style="color:#808080;font-size:0.9rem;"></span>
+                    </div>
+                </div>
+            </div>
+            <div v-html="article.article.Content"></div>
+        </div>
+    </div>
+</transition>

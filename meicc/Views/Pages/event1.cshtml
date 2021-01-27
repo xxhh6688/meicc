@@ -1,0 +1,35 @@
+﻿<transition name="fade">
+    <div v-if="event.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div style="position:relative;">
+                <img v-bind:src="event.event.FullBannerImage" style="width:100%;" />
+                <div style="position:absolute;top:0;left:0;right:0;bottom:0;background-color:#000000;opacity:0.2;z-index:1"></div>
+                <div style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:2;padding:20px;">
+                    <div style="margin-bottom:20px;">
+                        <img v-bind:src="event.event.Match.FullLogoImage" style="width:100px;height:100px;" />
+                    </div>
+                    <div style="font-weight:bold;font-size:1.5rem;color:#ffffff;margin-bottom:20px;">{{event.event.Name}}</div>
+                    <div style="font-weight:bold;font-size:1.2rem;color:#ffffff">{{event.event.StartTime}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-space" style="margin:0 auto;margin-top:32px;">
+            <div class="tab-bar">
+                <div class="tab-bar-item" v-bind:class="{'selected':event.switch.index==1}" v-on:click="event.switch.index=1">简介</div>
+                <div class="tab-bar-item" v-bind:class="{'selected':event.switch.index==2}" v-on:click="event.switch.index=2">参赛队伍</div>
+                <div class="tab-bar-item" v-bind:class="{'selected':event.switch.index==3}" v-on:click="event.switch.index=3">大赛章程</div>
+                <div class="tab-bar-item" v-bind:class="{'selected':event.switch.index==4}" v-on:click="event.switch.index=4">奖项设置</div>
+                <div class="tab-bar-item" v-bind:class="{'selected':event.switch.index==5}" v-on:click="event.switch.index=5">公告</div>
+                <div class="tab-bar-item" v-bind:class="{'selected':event.switch.index==6}" v-on:click="event.switch.index=6">联系方式</div>
+            </div>
+            <div style="margin-top20px;">
+                <div v-if="event.switch.index==1" v-html="event.event.Article1.Content"></div>
+                <div v-if="event.switch.index==2" v-html="event.event.Article2.Content"></div>
+                <div v-if="event.switch.index==3" v-html="event.event.Article3.Content"></div>
+                <div v-if="event.switch.index==4" v-html="event.event.Article4.Content"></div>
+                <div v-if="event.switch.index==5" v-html="event.event.Article5.Content"></div>
+                <div v-if="event.switch.index==6" v-html="event.event.Article6.Content"></div>
+            </div>
+        </div>
+    </div>
+</transition>

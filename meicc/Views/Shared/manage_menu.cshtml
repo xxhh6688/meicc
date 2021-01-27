@@ -1,0 +1,24 @@
+﻿<div style="position:fixed;left:0;bottom:0;top:0;width:300px;background-color:#404040">
+    <div style="width:300px;">
+        <a href="/#blade/home">
+            <div class="menu-item">
+                <i class="fas fa-home"></i><span>返回首页</span>
+            </div>
+        </a>
+        <a href="/#blade/manage/articles">
+            <div class="menu-item" v-bind:class="{'menu-selected':manageArticles.show||manageArticle.show}"><i class="fas fa-align-justify"></i><span>管理文章</span></div>
+        </a>
+        <a href="/#blade/manage/events">
+            <div class="menu-item" v-bind:class="{'menu-selected':manageEvents.show||manageEvent.show}"><i class="fas fa-align-justify"></i><span>管理日程</span></div>
+        </a>
+        <a href="/#blade/manage/competitions">
+            <div class="menu-item" v-bind:class="{'menu-selected':manageCompetitions.show||manageCompetition.show}"><i class="fas fa-align-justify"></i><span>管理赛事</span></div>
+        </a>
+        <a href="/#blade/manage/users">
+            <div class="menu-item" v-bind:class="{'menu-selected':manageUsers.show||manageUser.show}"><i class="fas fa-user-cog"></i><span>管理用户</span></div>
+        </a>
+        <a href="/#blade/manage/certs">
+            <div class="menu-item" v-bind:class="{'menu-selected':manageCerts.show||manageCert.show}"><i class="fas fa-align-justify"></i><span>管理证书</span></div>
+        </a>
+    </div>
+</div>

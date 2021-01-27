@@ -1,0 +1,72 @@
+﻿<transition name="fade">
+    <div v-if="manageArticle.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div class="input-box">
+                <div class="input-box-label">
+                    <span>标题</span>
+                </div>
+                <input type="text" v-model="manageArticle.article.Title" />
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label">
+                    <span>内容</span>
+                </div>
+                <textarea id="article-content-text">{{manageArticle.article.Content}}</textarea>
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label">
+                    <span>图示 (*点击更换)</span>
+                </div>
+                <div>
+                    <div id="uploadThumbnailProgress" style="display:none;">
+                        <span style="margin-right:16px">正在上传请稍后...</span><span class="progress_text" style="color:#000000"></span><span style="margin-left:4px;">%</span>
+                    </div>
+                    <div>
+                        <img style="width:200px;min-height:60px;cursor:pointer;" v-bind:src="manageArticle.article.FullThumbnail" title="点击更换"
+                             v-on:click="manageArticle.updateThumbnail()" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label">
+                    <span>设定置顶</span>
+                </div>
+                <div class="c-o-v" style="width:300px;">
+                    <div class="c-o-v-item" v-bind:class="{'selected':manageArticle.article.SetTop}"
+                         v-on:click="manageArticle.article.SetTop=true">是</div>
+                    <div class="c-o-v-item" v-bind:class="{'selected':manageArticle.article.SetTop==false}"
+                         v-on:click="manageArticle.article.SetTop=false">否</div>
+                </div>
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label">
+                    <span>设定封面故事</span>
+                </div>
+                <div class="c-o-v" style="width:300px;">
+                    <div class="c-o-v-item" v-bind:class="{'selected':manageArticle.article.SetStory}"
+                         v-on:click="manageArticle.article.SetStory=true">是</div>
+                    <div class="c-o-v-item" v-bind:class="{'selected':manageArticle.article.SetStory==false}"
+                         v-on:click="manageArticle.article.SetStory=false">否</div>
+                </div>
+            </div>
+            <div class="input-box" style="margin-top:20px" v-if="manageArticle.article.SetStory">
+                <div class="input-box-label">故事封面图示 (* 推荐长宽比高的图片)</div>
+                <div>
+                    <div id="uploadStoryImageProgress" style="display:none;">
+                        <span style="margin-right:16px">正在上传请稍后...</span><span class="progress_text" style="color:#000000"></span><span style="margin-left:4px;">%</span>
+                    </div>
+                    <div>
+                        <img style="width:300px;min-height:100px;cursor:pointer;" v-bind:src="manageArticle.article.FullStoryImage" title="点击更换"
+                             v-on:click="manageArticle.updateStoryImage()" />
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:16px;">
+                <a href="javascript:void(0)" class="btn btn-pri" v-on:click="manageArticle.addOrUpdate()">确定</a>
+                <a href="javascript:void(0)" class="btn btn-pri" style="margin-left:20px;" v-on:click="manageArticle.deleteArticle()">删除</a>
+            </div>
+        </div>
+    </div>
+</transition>

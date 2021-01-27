@@ -1,0 +1,24 @@
+﻿<transition name="fade">
+    <div v-if="login.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div class="row" style="margin-top:60px;">
+                <div class="login-banner-box col-sm-6"></div>
+                <div class="login-info-box col-sm-6">
+                    <div style="font-size:2rem;color:#808080;margin-bottom:30px;">
+                        <span>用户登陆</span>
+                    </div>
+                    <div class="input-box" style="margin-bottom:20px;">
+                        <input type="text" v-model="login.credential.cellphone" placeholder="手机号码" />
+                    </div>
+                    <div class="input-box">
+                        <input type="password" v-model="login.credential.password" placeholder="用户密码"
+                               v-on:keyup.enter="login.submit()" />
+                    </div>
+                    <div style="margin-top:20px;margin-bottom:30px;">
+                        <a href="javascript:void(0)" class="btn btn-pri login-button" v-on:click="login.submit()">登陆</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>

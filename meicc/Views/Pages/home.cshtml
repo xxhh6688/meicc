@@ -1,0 +1,110 @@
+﻿<transition name="fade">
+    <div v-if="home.show">
+        <div style="position:relative;">
+            <div style="position:relative;z-index:2">
+                <div class="page-space" style="padding:0 16px;margin:0 auto;background-color:#ffffff;">
+                    <div style="width:100%;position:relative;" id="banner-demo" class="banner-items-box">
+                        <div class="banner-items-inner-box"
+                             v-bind:style="{transform: 'translate3d('+(-(100/home.stories.length)*(home.banner.index))+'%, 0px, 0px)','width':100*home.stories.length+'%'}">
+                            <div class="banner-item" id="b1" v-for="s in home.stories"
+                                 style="position:relative;background-color:#ffffff;z-index:2;background-position:center;background-size:cover;background-repeat:no-repeat;"
+                                 v-bind:style="{'width':100/home.stories.length+'%'}">
+                                <div style="position:relative;left:0;width:100%;padding-top:30%;">
+                                    <img v-bind:src="s.FullStoryImage" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%" />
+                                </div>
+                                <a v-bind:href="'/#blade/article?id='+s.Id" style="position:absolute;top:0;left:0;right:0;bottom:0"></a>
+                                <div style="position:absolute;right:10px;bottom:10px;width:300px;height:60px;overflow:hidden;">
+                                    <div style="z-index:1;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0.5;background-color:#000000"></div>
+                                    <div style="padding:8px;z-index:2;color:#ffffff;position:absolute;top:0;left:0;right:0;bottom:0;">{{s.Title}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banner-status">
+                            <i class="fas fa-circle banner-status-item" 
+                               v-bind:class="{selected:home.banner.index==index}" 
+                               v-for="i,index in home.stories"
+                               v-on:click="home.banner.index = index"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="position:absolute;top:0;left:0;right:0;bottom:0;background-color:#ff0000;z-index:1"></div>
+        </div>
+        <div class="page-space" style="margin:0 auto;padding:16px;display:none;">
+            <div><span>“中国大学生机械工程创新创意大赛”以拓宽大学生的科学视野，提高其创新能力、工程设计能力和工程实践能力以及创业能力为目标。为引导大学生开展创新创意实践探索，培养机械行业优秀人才，促进我国机械行业发展方面取得了良好的成效</span></div>
+        </div>
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff">
+            <div style="padding:16px;font-weight:bold;">
+                <span style="color:#8c0606;font-size:1.2rem;">消息速递</span>
+            </div>
+            <div class="row">
+                <div class="col-xs-4" style="padding:20px;" v-for="a in home.articles">
+                    <div style="background-color:#eeeeee;">
+                        <div style="padding-top:56%;background-position:center;background-size:cover;background-repeat:no-repeat;"
+                             v-bind:style="{'backgroundImage':'url('+a.FullThumbnail+')'}">
+                            <a v-bind:href="'/#blade/article?id='+a.Id" style="position:absolute;top:0;left:0;right:0;bottom:0"></a>
+                        </div>
+                        <div style="margin-top:16px;padding:8px;display:flex;align-items:flex-start;">
+                            <div style="flex:1 1 auto;font-weight:bold;font-size:1.2rem;padding-right:8px;"><a v-bind:href="'/#blade/article?id='+a.Id">{{a.Title}}</a></div>
+                            <div style="flex:0 0 auto;width:100px;">
+                                <div>
+                                    <span style="font-size:1.2rem;">{{a.CreateTime}}</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:0.8rem;color:#888888"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;height:60px;align-items:center;justify-content:center">
+                <a href="/#blade/articles"><span style="background-color:#eeeeee;padding:8px 16px;">所有新闻</span></a>
+            </div>
+        </div>
+        <div class="page-space" style="margin:0 auto;background-color:#e7fcfb">
+            <div style="padding:16px;font-weight:bold;">
+                <span style="color:#8c0606;font-size:1.2rem;">大赛列表</span>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-md-4" style="padding:8px;margin-bottom:8px;" v-for="m in home.matches">
+                    <div style="background-color:#ffffff;">
+                        <div style="padding-top:56%;background-position:center;background-size:cover;background-repeat:no-repeat;"
+                             v-bind:style="{'backgroundImage':'url('+m.FullImage+')'}">
+                            <a v-bind:href="'/#blade/competition?id='+m.Id" style="position:absolute;top:0;left:0;right:0;bottom:0"></a>
+                        </div>
+                        <div style="margin-top:16px;padding:16px;">
+                            <div style="font-weight:bold;font-size:1.2rem;"><a v-bind:href="'/#blade/competition?id='+m.Id">{{m.Name}}</a></div>
+                            <div style="margin-top:16px;height:150px;overflow:hidden">{{m.Description}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;height:60px;margin-top:8px;align-items:center;justify-content:center">
+                <a href="/#blade/competitions">
+                    <span style="background-color:#eeeeee;padding:8px 16px;">所有大赛</span>
+                </a>
+            </div>
+        </div>
+        <div class="page-space" style="margin:0 auto;background-color:#f0efef">
+            <div style="padding:16px;font-weight:bold;">
+                <span style="color:#8c0606;font-size:1.2rem;">最新日程</span>
+            </div>
+            <div style="padding:16px;">
+                <div class="list-item-row header">
+                    <div class="list-item a">主题</div>
+                    <div class="list-item" style="width: 200px;">时间</div>
+                    <div class="list-item" style="width: 200px;">地点</div>
+                </div>
+                <div class="list-item-row" v-for="e in home.events">
+                    <div class="list-item a ellipsis"><a v-bind:href="'/#blade/event?id='+e.Id">{{e.Name}}</a></div>
+                    <div class="list-item" style="width: 200px;">{{e.StartTime}}</div>
+                    <div class="list-item" style="width: 200px;">{{e.Location}}</div>
+                </div>
+                <div style="display:flex;height:60px;align-items:center;justify-content:center">
+                    <a href="/#blade/events"><span style="background-color:#eeeeee;padding:8px 16px;">所有日程</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>

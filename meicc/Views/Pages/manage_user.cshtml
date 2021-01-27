@@ -1,0 +1,37 @@
+﻿<transition name="fade">
+    <div v-if="manageUser.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div class="input-box">
+                <div class="input-box-label"><span>姓名</span></div>
+                <input type="text" v-model="manageUser.user.Name" />
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label"><span>手机号码</span> <span v-if="!manageUser.user.Id" style="color:#ff0000;margin-left:20px;">默认密码为手机号码后6位</span></div>
+                <input type="text" v-model="manageUser.user.Cellphone" />
+            </div>
+            <div class="input-box" style="margin-top:20px;">
+                <div class="input-box-label"><span>用户类型</span></div>
+                <div style="display:flex;align-items:center;flex-wrap:wrap">
+                    <div class="ck-item">
+                        <i class="fas fa-check-square" v-bind:class="{'checked':(manageUser.user.Type&1)==1}"></i>
+                        <span>普通用户</span>
+                    </div>
+                    <div class="ck-item" style="margin-left:20px;" v-on:click="manageUser.changeUserType(8)">
+                        <i class="fas fa-check-square" v-bind:class="{'checked':(manageUser.user.Type&8)==8}"></i>
+                        <span>管理员</span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-box" style="margin-top:20px;" v-if="manageUser.user.Id">
+                <div class="input-box-label"><span>重置密码</span><span style="font-size:0.8rem;color:#808080">* 重置后新密码为手机号后六位</span></div>
+                <a href="javascript:void(0)" class="btn btn-pri" v-on:click="manageUser.resetPassword()"><span>确认重置</span></a>
+            </div>
+            <div style="margin-top:20px;">
+                <a href="javascript:void(0)" v-if="manageUser.user.Id" class="btn btn-pri" v-on:click="manageUser.updateUserInfo()">更新</a>
+                <a href="javascript:void(0)" v-if="manageUser.user.Id" class="btn btn-pri" v-on:click="manageUser.deleteUser()">删除</a>
+                <a href="javascript:void(0)" v-if="!manageUser.user.Id" class="btn btn-pri" v-on:click="manageUser.addUser()">确定</a>
+            </div>
+        </div>
+    </div>
+</transition>

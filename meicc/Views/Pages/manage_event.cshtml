@@ -1,0 +1,67 @@
+﻿<transition name="fade">
+    <div v-if="manageEvent.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div class="input-box">
+                <div class="input-box-label">标题</div>
+                <input type="text" v-model="manageEvent.event.Name" />
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">日程地点</div>
+                <input type="text" v-model="manageEvent.event.Location" />
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">开始时间 (*2020-01-01)</div>
+                <input type="text" v-model="manageEvent.event.StartTime" placeholder="2020-01-01" />
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">结束时间 (*2020-01-01)</div>
+                <input type="text" v-model="manageEvent.event.EndTime" placeholder="2020-01-01" />
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">相关赛事</div>
+                <select v-model="manageEvent.event.MatchId">
+                    <option value="0">未选择</option>
+                    <option v-for="o in manageEvent.event.Competitions" v-bind:value="o.Id">{{o.Name}}</option>
+                </select>
+            </div>
+            <div class="input-box" style="margin-top:20px">
+                <div class="input-box-label">故事封面图示 (* 推荐长宽比高的图片)</div>
+
+                <div>
+                    <div id="uploadBannerImageProgress" style="display:none">
+                        <span style="margin-right:16px">正在上传请稍后...</span><span class="progress_text" style="color:#000000"></span><span style="margin-left:4px;">%</span>
+                    </div>
+                    <div>
+                        <img style="width:300px;min-height:100px;cursor:pointer;" v-bind:src="manageEvent.event.FullBannerImage" title="点击更换"
+                             v-on:click="manageEvent.updateBannerImage()" />
+                    </div>
+                </div>
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">日程信息</div>
+                <div class="tab-bar">
+                    <div class="tab-bar-item" v-bind:class="{'selected':manageEvent.switch.index==1}"
+                         v-on:click="manageEvent.switchIndex(1)">简介</div>
+                    <div class="tab-bar-item" v-bind:class="{'selected':manageEvent.switch.index==2}"
+                         v-on:click="manageEvent.switchIndex(2)">参赛队伍</div>
+                    <div class="tab-bar-item" v-bind:class="{'selected':manageEvent.switch.index==3}"
+                         v-on:click="manageEvent.switchIndex(3)">大赛章程</div>
+                    <div class="tab-bar-item" v-bind:class="{'selected':manageEvent.switch.index==4}"
+                         v-on:click="manageEvent.switchIndex(4)">奖项设置</div>
+                    <div class="tab-bar-item" v-bind:class="{'selected':manageEvent.switch.index==5}"
+                         v-on:click="manageEvent.switchIndex(5)">公告</div>
+                    <div class="tab-bar-item" v-bind:class="{'selected':manageEvent.switch.index==6}"
+                         v-on:click="manageEvent.switchIndex(6)">联系方式</div>
+                </div>
+                <div>
+                    <textarea id="manage-event-text">{{manageEvent.event.Article1.Content}}</textarea>
+                </div>
+            </div>
+            <div style="margin-top:16px;">
+                <a href="javascript:void(0)" class="btn btn-pri"
+                   v-on:click="manageEvent.addOrUpdate()"><span>确定</span></a>
+            </div>
+        </div>
+    </div>
+</transition>

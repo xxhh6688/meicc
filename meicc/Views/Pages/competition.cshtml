@@ -1,0 +1,35 @@
+﻿<transition name="fade">
+    <div v-if="competition.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div class="row" style="background-color:#808080">
+                <div class="col-xs-6">
+                    <img v-bind:src="competition.match.FullImage" style="width:100%;display:block" />
+                    <div style="position:absolute;top:10px;left:10px;width:100px;height:100px;">
+                        <img v-bind:src="competition.match.FullLogoImage" style="width:100px;height:100px;" />
+                    </div>
+                </div>
+                <div class="col-xs-6" style="padding-left:20px;">
+                    <div style="font-weight:bold;font-size:1.2rem;color:#ffffff;height:40px;display:flex;align-items:center;">{{competition.match.Name}}</div>
+                    <div style="color:#ffffff;overflow:auto;height:300px;max-height:400px" v-html="competition.match.Description"></div>
+                </div>
+            </div>
+        </div>
+        <div class="page-space" style="margin:0 auto;padding:16px;background-color:#f0efef;margin-top:32px;">
+            <div>赛事日程安排</div>
+            <div>
+                <div class="list-item-row header">
+                    <div class="list-item a">主题</div>
+                    <div class="list-item" style="width: 200px;">开始时间</div>
+                    <div class="list-item" style="width: 200px;">结束时间</div>
+                    <div class="list-item" style="width: 200px;">地点</div>
+                </div>
+                <div class="list-item-row" v-for="e in competition.match.Events">
+                    <div class="list-item a ellipsis"><a v-bind:href="'/#blade/event?id='+e.Id">{{e.Name}}</a></div>
+                    <div class="list-item" style="width: 200px;">{{e.StartTime}}</div>
+                    <div class="list-item" style="width: 200px;">{{e.EndTime}}</div>
+                    <div class="list-item" style="width: 200px;">{{e.Location}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>

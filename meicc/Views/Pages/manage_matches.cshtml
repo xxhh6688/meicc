@@ -1,0 +1,25 @@
+﻿<transition name="fade">
+    <div v-if="manageCompetitions.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div style="margin-bottom:16px;">
+                <a href="/#blade/manage/competition" class="btn btn-pri">添加赛事</a>
+            </div>
+            <div class="list-item-row header">
+                <div class="list-item" style="width:200px">赛事名称</div>
+                <div class="list-item a"></div>
+            </div>
+            <div class="list-item-row" v-for="a in manageCompetitions.matches" style="align-items:flex-start;padding:8px;">
+                <div class="list-item" style="width:200px">
+                    <a v-bind:href="'/#blade/manage/competition?id='+a.Id"><img style="width:100%;" v-bind:src="a.FullImage" /></a>
+                </div>
+                <div class="list-item a" style="padding:0 16px;">
+                    <div>
+                        <a v-bind:href="'/#blade/manage/competition?id='+a.Id"><span style="color:#670404;font-size:1.2rem;">{{a.Name}}</span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</transition>

@@ -1,0 +1,23 @@
+﻿<transition name="fade">
+    <div v-if="events.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div class="site-nav">
+                <a href="">首页</a> <span style="margin:0 16px;">></span> 日程
+            </div>
+            <div class="list-item-row header">
+                <div class="list-item a">主题</div>
+                <div class="list-item" style="width: 200px;">开始时间</div>
+                <div class="list-item" style="width: 200px;">结束时间</div>
+                <div class="list-item" style="width: 200px;">地点</div>
+            </div>
+            <div class="list-item-row" v-for="a in events.events">
+                <div class="list-item a ellipsis">
+                    <a v-bind:href="'/#blade/event?id='+a.Id">{{a.Name}}</a>
+                </div>
+                <div class="list-item" style="width: 200px;">{{a.StartTime}}</div>
+                <div class="list-item" style="width: 200px;">{{a.EndTime}}</div>
+                <div class="list-item" style="width: 200px;">{{a.Location}}</div>
+            </div>
+        </div>
+    </div>
+</transition>

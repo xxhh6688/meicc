@@ -1,0 +1,278 @@
+﻿<style>
+    .menu-item {
+        height: 60px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: #808080;
+    }
+
+        .menu-item.selected {
+            border:none;
+            color: #ff0000;
+            background-color: white;
+        }
+
+    .page-space {
+        width: 100%;
+    }
+
+    @@media (min-width: 1440px) {
+        .page-space {
+            width: 1200px;
+        }
+    }
+</style>
+<div id="main" v-cloak>
+    <div id="main-nav">
+        <div class="page-space" style="margin:0 auto;margin-top:20px;display:flex;position:relative;">
+            <div style="height:80px;flex:0 0 auto;">
+                <img src="~/Content/logo2.png" style="height:100%;" />
+            </div>
+            <div style="flex:1 1 auto;height:80px;padding-right:8px;display:flex;flex-direction:column;align-items:flex-end">
+                <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;height:40px;">
+                    <div style="margin-right:16px" v-if="(common.currentUser.Type&8)==8"><a href="/#blade/manage/articles">管理</a></div>
+                    <div style="margin-right:16px" v-if="!common.currentUser.Id"><a href="/#blade/login">登录</a></div>
+                    <div style="margin-right:16px;position:relative;" v-if="common.currentUser.Id">
+                        <a href="javascript:void(0)" v-on:click="common.showCurrentUserMenu=!common.showCurrentUserMenu">{{common.currentUser.Name}}</a>
+                        <div v-if="common.showCurrentUserMenu" style="position:absolute;top:40px;left:-50%;border:thin solid #cccccc;z-index:100;background-color:#ffffff;min-width:150px;">
+                            <div style="position:absolute;top:-10px;left:40px;width:30px;height:30px;border:thin solid #cccccc;transform:rotate(45deg);background-color:#ffffff"></div>
+                            <div style="position:absolute;top:0;right:0;left:0;bottom:0;z-index:100;background-color:#ffffff;padding:16px;min-height:100px;border:thin solid #cccccc;border-top:none;">
+                                <div><a href="/#blade/me">修改信息</a></div>
+                                <div><a href="javascript:void(0)" v-on:click="login.logout()">退出系统</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-right:8px">英文版</div>
+                </div>
+                <div class="search-bar" style="width: 300px;">
+                    <input type="text" v-model="search.searchText" placeholder="搜索 ..." style="background-color:#f3f3f3" v-on:keyup.enter="common.goSearch()">
+                    <div class="search-btn" style="background-color:#ff0000"><i class="fas fa-search" style="color:#ffffff" v-on:click="common.goSearch()"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="page-space" style="margin:0 auto;margin-top:20px;display:flex;">
+            <div style="flex:1 1 auto;display:flex;align-items:center;height:60px;">
+                <a href="/#blade/home"><div class="menu-item" v-bind:class="{'selected':home.show}">首页</div></a>
+                <a href="/#blade/competitions"><div class="menu-item" v-bind:class="{'selected':competitions.show}">专业赛事</div></a>
+                <a href="/#blade/events">
+                    <div class="menu-item" v-bind:class="{'selected':events.show}">日程</div>
+                </a>
+                <a href="/#blade/articles"><div class="menu-item" v-bind:class="{'selected':articles.show}">新闻</div></a>
+                <a href="/#blade/article?id=70&m=1"><div class="menu-item" v-bind:class="{'selected':article.show&&article.article.Id==70}">管理文件</div></a>
+                <a href="/#blade/article?id=71&m=1"><div class="menu-item" v-bind:class="{'selected':article.show&&article.article.Id==71}">大赛介绍</div></a>
+                <a href="/#blade/article?id=72&m=1"><div class="menu-item" v-bind:class="{'selected':article.show&&article.article.Id==72}">章程</div></a>
+                <a href="/#blade/article?id=73&m=1"><div class="menu-item" v-bind:class="{'selected':article.show&&article.article.Id==73}">组织机构</div></a>
+                <a href="/#blade/cert"><div class="menu-item">证书查询</div></a>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("~/Views/pages/home.cshtml")
+    @Html.Partial("~/Views/pages/competitions.cshtml")
+    @Html.Partial("~/Views/pages/competition.cshtml")
+    @Html.Partial("~/Views/pages/event1.cshtml")
+    @Html.Partial("~/Views/pages/events.cshtml")
+    @Html.Partial("~/Views/pages/articles.cshtml")
+    @Html.Partial("~/Views/pages/article.cshtml")
+    @Html.Partial("~/Views/pages/manage_article.cshtml")
+    @Html.Partial("~/Views/pages/manage_articles.cshtml")
+    @Html.Partial("~/Views/pages/manage_event.cshtml")
+    @Html.Partial("~/Views/pages/manage_events.cshtml")
+    @Html.Partial("~/Views/pages/manage_matches.cshtml")
+    @Html.Partial("~/Views/pages/manage_match.cshtml")
+    @Html.Partial("~/Views/pages/login.cshtml")
+    @Html.Partial("~/Views/pages/manage_users.cshtml")
+    @Html.Partial("~/Views/pages/manage_user.cshtml")
+    @Html.Partial("~/Views/pages/manage_certs.cshtml")
+    @Html.Partial("~/Views/pages/manage_cert.cshtml")
+    @Html.Partial("~/Views/pages/cert.cshtml")
+    @Html.Partial("~/Views/pages/search.cshtml")
+    @Html.Partial("~/Views/pages/me.cshtml")
+    <div id="foot-nav" class="row page-space" style="color:#808080;margin:0 auto;padding:16px;background-color:#ffffff;margin-top:16px;">
+        <div style="display:flex;align-items:center;flex-wrap:wrap">
+            <div class="related_link_item">
+                <a href="http://www.moe.edu.cn/" target="_blank"><img title="教育部" src="http://meea.cmes.org/content/image/jiaoyubu.jpg"></a>
+                <span>教育部</span>
+            </div>
+            <div class="related_link_item">
+                <a href="http://www.cast.org.cn/" target="_blank"><img title="中国科学技术协会" src="http://meea.cmes.org/content/image/kexie.jpg"></a>
+                <span>中国科学技术协会</span>
+            </div>
+            <div class="related_link_item">
+                <a href="http://www.ceeaa.org.cn/" target="_blank"><img title="中国工程教育认证协会" src="http://meea.cmes.org/content/image/renzheng.png"></a>
+                <span>中国工程教育认证协会</span>
+            </div>
+            <div class="related_link_item">
+                <a href="http://www.ieagreements.org" target="_blank"><img title="国际工程师联盟" src="http://meea.cmes.org/content/image/iea-logo.png"></a>
+                <span>国际工程师联盟</span>
+            </div>
+            <div class="related_link_item">
+                <a href="http://meuee.cmes.org/" target="_blank"><img src="http://meea.cmes.org/content/image/lianmeng.png" title="中国机械行业卓越工程师教育联盟"></a>
+                <span>中国机械行业卓越工程师教育联盟</span>
+            </div>
+            <div class="related_link_item">
+                <a href="http://meea.cmes.org/" target="_blank"><img src="http://meea.cmes.org/content/image/cmes.jpg" title="中国机械工程学会"></a>
+                <span>中国机械工程学会</span>
+            </div>
+        </div>
+        <div style="width:100%;text-align:center;margin-top:30px;padding-top:10px;border-top:thin solid #0094ff">
+            <span>中华人民共和国社会团体登记证/社证字第4347号/社团代码:50000409-1</span><br>
+            <span> 中国机械工程学会/北京市海淀区首体南路9号主语国际4号楼11层，邮编100048</span><br>
+            <span> 京ICP备05060958号 中国机械工程学会版权所有,未经同意请勿转载</span>
+        </div>
+    </div>
+    <div style="display:none;">
+        <form id="uploadform" enctype="multipart/form-data" method="post" action="">
+            <input autocomplete="off" type="file" class="" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" />
+        </form>
+        <form id="uploadformBlob" enctype="multipart/form-data" method="post" action="">
+            <input autocomplete="off" type="file" class="" name="fileToUploadBlob" id="fileToUploadBlob" onchange="fileSelectedBlob();" />
+        </form>
+    </div>
+    <div class="dialog" id="uploadCKFileDialog" style="display:none;">
+        <div class="dialog-bk"></div>
+        <div class="dialog-inner">
+            <div class="dialog-bar">
+                <span>上传文件</span>
+                <div class="dialog-bar-close" onclick="$('#uploadCKFileDialog').hide()">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="dialog-contentpane" style="padding:16px;">
+                <div id="uploadCKFileProgress" style="display:none;margin-bottom:16px;color:#808080">
+                    <span style="margin-right:16px">正在上传请稍后...</span><span class="progress_text" style="color:#000000"></span><span style="margin-left:4px;">%</span>
+                </div>
+                <a href="javascript:void(0)" class="btn btn-pri" id="uploadCKFile"><span>上传文件</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var main = new Vue({
+        el: "#main",
+        data: {
+            home: home,
+            competitions: competitions,
+            competition: competition,
+            event: event,
+            events: events,
+            articles: articles,
+            article: article,
+            manageArticle: manageArticle,
+            manageArticles: manageArticles,
+            manageEvent: manageEvent,
+            manageEvents: manageEvents,
+            manageCompetitions: manageCompetitions,
+            manageCompetition: manageCompetition,
+            login: login,
+            manageUsers: manageUsers,
+            manageUser: manageUser,
+            manageCerts: manageCerts,
+            manageCert: manageCert,
+            cert: cert,
+            search: search,
+            me: me,
+            common: common
+        }
+    });
+    var router = {
+        currentPage: null,
+        map: [
+            { "url": "", "page": main.home },
+            { "url": "/home", "page": main.home },
+            { "url": "/competitions", "page": main.competitions },
+            { "url": "/competition\\?.*?", "page": main.competition },
+            { "url": "/event\\?.*?", "page": main.event },
+            { "url": "/events", "page": main.events },
+            { "url": "/articles", "page": main.articles },
+            { "url": "/article\\?.*?", "page": main.article },
+            { "url": "/login", "page": main.login },
+            { "url": "/manage/article", "page": main.manageArticle },
+            { "url": "/manage/article\\?.*?", "page": main.manageArticle },
+            { "url": "/manage/articles", "page": main.manageArticles },
+            { "url": "/manage/event", "page": main.manageEvent },
+            { "url": "/manage/event\\?.*?", "page": main.manageEvent },
+            { "url": "/manage/events", "page": main.manageEvents },
+            { "url": "/manage/competitions", "page": main.manageCompetitions },
+            { "url": "/manage/competition", "page": main.manageCompetition },
+            { "url": "/manage/competition\\?.*?", "page": main.manageCompetition },
+            { "url": "/manage/users", "page": main.manageUsers },
+            { "url": "/manage/user\\?.*?", "page": main.manageUser },
+            { "url": "/manage/user", "page": main.manageUser },
+            { "url": "/manage/certs", "page": main.manageCerts },
+            { "url": "/manage/cert", "page": main.manageCert },
+            { "url": "/manage/cert\\?.*?", "page": main.manageCert },
+            { "url": "/cert", "page": main.cert },
+            { "url": "/search", "page": main.search },
+            { "url": "/me", "page": main.me },
+        ],
+        getTargetPage: function () {
+            var self = this;
+            var path = window.location.hash.replace("#blade", "");
+            var page = null;
+            $.each(this.map, function (a, b) {
+                var patts = '^' + b.url + '$';
+                var patt = new RegExp(patts, "ig");
+                if (patt.test(path) === true) {
+                    page = b.page;
+                    return false;
+                }
+            });
+
+            return page;
+        },
+        parse: function () {
+            var self = this;
+            var path = window.location.hash;
+            var page = self.getTargetPage();
+            if (self.currentPage && self.currentPage.path != path) {
+                if (self.currentPage.cleanup) {
+                    self.currentPage.cleanup();
+                }
+
+                self.currentPage.show = false;
+            }
+
+            self.currentPage = page;
+            self.currentPage.path = path;
+            page.show = true;
+            document.title = page.title;
+            if (page.init) {
+                console.log("init page");
+                page.init();
+            }
+
+            main.common.cleanup();
+            main.common.init();
+        }
+    };
+    $(document).ready(function () {
+        window.onhashchange = function () {
+            router.parse();
+        };
+        router.parse();
+    });
+
+    function fileSelectedBlob() {
+        var file = document.getElementById('fileToUploadBlob').files[0];
+        if (file) {
+            var fileSize = 0;
+            if (file.size > 1024 * 1024)
+                fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            else
+                fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+            startUploadBlob();
+        }
+    }
+
+    function startUploadBlob() {
+        let file = document.getElementById('fileToUploadBlob').files[0]
+        azStore.uploadFile(file);
+    }
+
+    function uploadfileBlob() {
+        $("#fileToUploadBlob").trigger("click");
+    }
+</script>

@@ -1,0 +1,38 @@
+﻿<transition name="fade">
+    <div v-if="cert.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div class="site-nav" v-if="!article.article.m">
+                <a href="/">首页</a> <span style="margin:0 16px;">></span> <a href="/#blade/cert">证书查询</a>
+            </div>
+            <div>
+                <div class="search-bar" style="width:300px;border:thin solid #cccccc;">
+                    <input type="text" placeholder="搜索证书编号" v-model="cert.searchText" v-on:keyup.enter="cert.searchCert()" />
+                    <div class="search-btn">
+                        <i class="fas fa-search" v-on:click="cert.searchCert()"></i>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:40px" v-if="!cert.cert.Id">
+                <span>未发现符合条件的证书，请检查证书ID</span>
+            </div>
+            <div style="margin-top:30px;margin-bottom:30px;" v-if="cert.cert.Id">
+                <div class="input-box">
+                    <div class="input-box-label">证书名称</div>
+                    <div>{{cert.cert.Name}}</div>
+                </div>
+                <div class="input-box">
+                    <div class="input-box-label">证书ID</div>
+                    <div>{{cert.cert.CertId}}</div>
+                </div>
+                <div class="input-box">
+                    <div class="input-box-label">创建时间</div>
+                    <span>{{cert.cert.CreateTime}}</span>
+                </div>
+                <div class="input-box">
+                    <div class="input-box-label">证书内容</div>
+                    <div v-html="cert.cert.Content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>

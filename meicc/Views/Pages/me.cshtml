@@ -1,0 +1,36 @@
+﻿<transition name="fade">
+    <div v-if="me.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div class="tab-bar" style="margin-bottom:20px;">
+                <div class="tab-bar-item" v-on:click="me.switchIndex=1" v-bind:class="{selected:me.switchIndex==1}">基本信息</div>
+                <div class="tab-bar-item" v-on:click="me.switchIndex=2" v-bind:class="{selected:me.switchIndex==2}">账户安全</div>
+            </div>
+            <div v-if="me.switchIndex==1">
+                <div class="input-box">
+                    <div class="input-box-label"><span>姓名</span></div>
+                    <input type="text" v-model="me.user.Name" />
+                </div>
+                <div class="input-box" style="margin-top:20px;">
+                    <div class="input-box-label"><span>手机号码</span></div>
+                    <input type="text" v-model="me.user.Cellphone" readonly />
+                </div>
+                <a href="javascript:void(0)" style="margin-top:20px;" class="btn btn-pri" v-on:click="me.updateUserInfo()">更新</a>
+            </div>
+            <div v-if="me.switchIndex==2">
+                <div class="input-box" style="margin-top:20px;">
+                    <div class="input-box-label"><span>旧密码</span></div>
+                    <input type="password" v-model="me.user.OldPsw" />
+                </div>
+                <div class="input-box" style="margin-top:20px;">
+                    <div class="input-box-label"><span>新密码</span></div>
+                    <input type="password" v-model="me.user.NewPsw" />
+                </div>
+                <div class="input-box" style="margin-top:20px;">
+                    <div class="input-box-label"><span>重复密码</span></div>
+                    <input type="password" v-model="me.user.NewPsw2" />
+                </div>
+                <a href="javascript:void(0)" style="margin-top:20px;" class="btn btn-pri" v-on:click="me.updateUserPsw()">更新</a>
+            </div>
+        </div>
+    </div>
+</transition>

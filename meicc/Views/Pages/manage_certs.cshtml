@@ -1,0 +1,29 @@
+﻿<transition name="fade">
+    <div v-if="manageCerts.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div style="margin-bottom:16px;display:flex;align-items:center;">
+                <div class="search-bar" style="width:300px;border:thin solid #cccccc;">
+                    <input type="text" placeholder="搜索证书编号" v-model="manageCerts.searchText" v-on:keyup.enter="manageCerts.searchCert()" />
+                    <div class="search-btn">
+                        <i class="fas fa-search" v-on:click="manageCerts.searchCert()"></i>
+                    </div>
+                </div>
+                <a href="/#blade/manage/cert" class="btn btn-pri">添加证书</a>
+                <span style="margin-left:20px;">共{{manageCerts.certs.length}}个证书</span>
+            </div>
+            <div class="list-item-row header">
+                <div class="list-item a">证书编号</div>
+                <div class="list-item" style="width:200px">创建时间</div>
+                <div class="list-item" style="width:80px">操作</div>
+            </div>
+            <div class="list-item-row color-row" v-for="a in manageCerts.certs">
+                <div class="list-item a"><a v-bind:href="'/#blade/manage/cert?id='+a.Id"><span style="color:#670404;font-size:1.2rem;">{{a.CertId}}</span></a></div>
+                <div class="list-item" style="width:200px">{{a.CreateTime}}</div>
+                <div class="list-item" style="width:80px">
+                    <div><a v-bind:href="'/#blade/manage/cert?id='+a.Id">编辑</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>

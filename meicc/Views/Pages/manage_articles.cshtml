@@ -1,0 +1,47 @@
+﻿<transition name="fade">
+    <div v-if="manageArticles.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div style="margin-bottom:16px;display:flex;align-items:center;">
+                <div class="search-bar" style="width:300px;border:thin solid #cccccc">
+                    <input type="text" placeholder="检索文章" v-model="manageArticles.searchText" v-on:keyup.enter="manageArticles.search()" />
+                    <div class="search-btn">
+                        <i class="fas fa-search" v-on:click="manageArticles.search()"></i>
+                    </div>
+                </div>
+                <a href="/#blade/manage/article" class="btn btn-pri">添加文章</a>
+                <span style="margin-left:20px;">共{{manageArticles.totalCount}}篇文章</span>
+            </div>
+            <div style="display:flex;" v-for="a in manageArticles.articles">
+                <div style="flex:0 0 auto;width:200px;">
+                    <a v-bind:href="'/#blade/manage/article?id='+a.Id"><img style="width:100%;" v-bind:src="a.FullThumbnail" /></a>
+                </div>
+                <div style="flex:1 1 auto;padding:0 32px;">
+                    <div>
+                        <a v-bind:href="'/#blade/manage/article?id='+a.Id"><span style="color:#670404;font-size:1.2rem;">{{a.Title}}</span></a>
+                    </div>
+                    <div>
+                        <span style="color:#3e3e3e;font-size:0.8rem;">
+                            {{a.Content}}
+                        </span>
+                    </div>
+                    <div style="margin-top:16px;display:flex;">
+                        <div class="tag-item" v-if="a.SetStory"><span>封面故事</span></div>
+                        <div class="tag-item" v-if="a.SetTop" style="margin-left:8px;"><span>置顶</span></div>
+                    </div>
+                </div>
+                <div style="flex:0 0 auto;width:200px;">
+                    <div>
+                        <span style="color:#3e3e3e;font-size:1.2rem;">{{a.CreateTime}}</span>
+                    </div>
+                    <div style="margin-top:16px;">
+                        <span style="color:#808080;font-size:0.9rem;"></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <pages v-bind:pages="manageArticles.pages"></pages>
+            </div>
+        </div>
+    </div>
+</transition>

@@ -1,0 +1,47 @@
+﻿<transition name="fade">
+    <div v-if="manageCompetition.show">
+        @Html.Partial("~/Views/Shared/manage_menu.cshtml")
+        <div style="margin-left:300px;padding:16px;">
+            <div class="input-box">
+                <div class="input-box-label">赛事名称</div>
+                <input type="text" v-model="manageCompetition.match.Name" />
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">赛事介绍</div>
+                <textarea id="manage-match-text">{{manageCompetition.match.Description}}</textarea>
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">
+                    <span>图示 (*点击更换)</span>
+                </div>
+                <div>
+                    <div id="uploadImageProgress" style="display:none;">
+                        <span style="margin-right:16px">正在上传请稍后...</span><span class="progress_text" style="color:#000000"></span><span style="margin-left:4px;">%</span>
+                    </div>
+                    <div>
+                        <img style="width:200px;min-height:60px;cursor:pointer;" v-bind:src="manageCompetition.match.FullImage" title="点击更换"
+                             v-on:click="manageCompetition.updateImage()" />
+                    </div>
+                </div>
+            </div>
+            <div class="input-box" style="margin-top:16px;">
+                <div class="input-box-label">
+                    <span>LOGO (*点击更换)</span>
+                </div>
+                <div>
+                    <div id="uploadLogoImageProgress" style="display:none;">
+                        <span style="margin-right:16px">正在上传请稍后...</span><span class="progress_text" style="color:#000000"></span><span style="margin-left:4px;">%</span>
+                    </div>
+                    <div>
+                        <img style="width:200px;min-height:60px;cursor:pointer;" v-bind:src="manageCompetition.match.FullLogoImage" title="点击更换"
+                             v-on:click="manageCompetition.updateLogoImage()" />
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:16px;">
+                <a href="javascript:void(0)" class="btn btn-pri"
+                   v-on:click="manageCompetition.addOrUpdate()"><span>确定</span></a>
+            </div>
+        </div>
+    </div>
+</transition>

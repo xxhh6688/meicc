@@ -1,0 +1,58 @@
+﻿<transition name="fade">
+    <div v-if="articles.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;position:relative;height:420px;">
+            <div class="row" style="position:absolute;left:-16px;right:-16px;">
+                <div class="col-xs-4" style="padding:16px;" v-for="a in articles.topArticles">
+                    <div>
+                        <a v-bind:href="'/#blade/article?id='+a.Id">
+                            <img style="width:100%;" v-bind:src="a.FullThumbnail" />
+                        </a>
+                    </div>
+                    <div style="background-color:#3e3e3e;padding:32px;">
+                        <div>
+                            <a v-bind:href="'/#blade/article?id='+a.Id">
+                                <span style="color:#ffffff">
+                                    {{a.Title}}
+                                </span>
+                            </a>
+                        </div>
+                        <div style="margin-top:16px;">
+                            <span style="color:#ffffff">
+                                {{a.CreateTime}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-space" style="margin:0 auto;background-color:#edebeb;">
+            <div style="padding:16px;">
+                <div style="display:flex;" v-for="a in articles.articles">
+                    <div style="width:200px;">
+                        <a v-bind:href="'/#blade/article?id='+a.Id">
+                            <img style="width:100%;" v-bind:src="a.FullThumbnail" />
+                        </a>
+                    </div>
+                    <div style="flex:1 1 auto;padding:0 32px;">
+                        <div>
+                            <a v-bind:href="'/#blade/article?id='+a.Id"><span style="color:#670404;font-size:1.2rem;">{{a.Title}}</span></a>
+                        </div>
+                        <div>
+                            <span style="color:#3e3e3e;font-size:0.8rem;">
+                                {{a.Content}}
+                            </span>
+                        </div>
+                    </div>
+                    <div style="flex:0 0 auto;width:200px;">
+                        <div>
+                            <span style="color:#3e3e3e;font-size:1.2rem;">{{a.CreateTime}}</span>
+                        </div>
+                        <div style="margin-top:16px;">
+                            <span style="color:#808080;font-size:0.9rem;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>

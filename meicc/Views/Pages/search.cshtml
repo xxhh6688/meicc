@@ -1,0 +1,74 @@
+﻿<transition name="fade">
+    <div v-if="search.show">
+        <div class="page-space" style="margin:0 auto;background-color:#ffffff;">
+            <div class="site-nav" v-if="!article.article.m">
+                <a href="/">首页</a> <span style="margin:0 16px;">></span> <span>搜索</span>
+            </div>
+            <div class="tab-bar" style="margin-bottom:20px;">
+                <div class="tab-bar-item" v-on:click="search.switchIndex=1" v-bind:class="{selected:search.switchIndex==1}">文章 ({{search.articles.length}})</div>
+                <div class="tab-bar-item" v-on:click="search.switchIndex=2" v-bind:class="{selected:search.switchIndex==2}">赛事日程 ({{search.events.length}})</div>
+                <div class="tab-bar-item" v-on:click="search.switchIndex=3" v-bind:class="{selected:search.switchIndex==3}">比赛 ({{search.competitions.length}})</div>
+            </div>
+            <div v-if="search.switchIndex==1">
+                <div style="display:flex;" v-for="a in search.articles">
+                    <div style="width:200px;">
+                        <a v-bind:href="'/#blade/article?id='+a.Id">
+                            <img style="width:100%;" v-bind:src="a.FullThumbnail" />
+                        </a>
+                    </div>
+                    <div style="flex:1 1 auto;padding:0 32px;">
+                        <div>
+                            <a v-bind:href="'/#blade/article?id='+a.Id"><span style="color:#670404;font-size:1.2rem;">{{a.Title}}</span></a>
+                        </div>
+                        <div>
+                            <span style="color:#3e3e3e;font-size:0.8rem;">
+                                {{a.Content}}
+                            </span>
+                        </div>
+                    </div>
+                    <div style="flex:0 0 auto;width:200px;">
+                        <div>
+                            <span style="color:#3e3e3e;font-size:1.2rem;">{{a.CreateTime}}</span>
+                        </div>
+                        <div style="margin-top:16px;">
+                            <span style="color:#808080;font-size:0.9rem;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="search.switchIndex==2">
+                <div class="list-item-row header">
+                    <div class="list-item a">主题</div>
+                    <div class="list-item" style="width: 200px;">开始时间</div>
+                    <div class="list-item" style="width: 200px;">结束时间</div>
+                    <div class="list-item" style="width: 200px;">地点</div>
+                </div>
+                <div class="list-item-row" v-for="a in search.events">
+                    <div class="list-item a ellipsis">
+                        <a v-bind:href="'/#blade/event?id='+a.Id">{{a.Name}}</a>
+                    </div>
+                    <div class="list-item" style="width: 200px;">{{a.StartTime}}</div>
+                    <div class="list-item" style="width: 200px;">{{a.EndTime}}</div>
+                    <div class="list-item" style="width: 200px;">{{a.Location}}</div>
+                </div>
+            </div>
+            <div v-if="search.switchIndex==3">
+                <div class="row">
+                    <div class="col-xs-3 col-md-4" style="padding:8px;margin-bottom:8px;" v-for="m in search.competitions">
+                        <div style="background-color:#ffffff;">
+                            <div>
+                                <a v-bind:href="'/#blade/competition?id='+m.Id">
+                                    <img v-bind:src="m.FullImage" style="width:100%;height:200px;" />
+                                </a>
+                            </div>
+                            <div style="margin-top:16px;padding:16px;">
+                                <div style="font-weight:bold;font-size:1.2rem;">{{m.Name}}</div>
+                                <div style="margin-top:16px;height:100px;overflow:hidden">{{m.Description}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>
